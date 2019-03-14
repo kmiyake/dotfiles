@@ -83,6 +83,31 @@ autoload -U compinit
 compinit
 zstyle ':completion:*' list-colors ''
 
+#------------------------------
+# Variables
+#
 alias ls='ls -G'
+
+# Bundler
+alias bi='bundle install'
+alias be='bundle exec'
+
+# Git
+alias g='git'
+alias gd='git diff --color'
+alias gds='git diff --color --staged'
+alias ga='git add'
+alias gap='git add -p'
+alias gc='git commit'
+alias gca='git commit --amend'
+alias gco='git checkout'
+alias gcop='git branch -a | peco | xargs git checkout'
+alias gs='git status'
+alias grm="git status | grep deleted | awk '{print \$2}' | xargs git rm"
+alias gg='git grep -i -n'
+alias gpsf='git push --force-with-lease'
+alias gb='git branch'
+alias gbm='git branch --merged'
+alias gbd='git branch -d'
 
 [[ -f ~/.localrc.zsh ]] && . ~/.localrc.zsh

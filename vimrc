@@ -94,6 +94,7 @@ let g:ale_fix_on_save = 0
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'ruby': ['rubocop', 'reek'],
+      \ 'elixir': ['credo', 'elixir-ls'],
       \}
 let g:ale_fixers = {
       \ 'javascript': ['prettier', 'eslint'],
@@ -105,6 +106,11 @@ let g:ale_ruby_reek_executable = 'bundle'
 let g:ale_ruby_reek_show_context = 1
 let g:ale_ruby_brakeman_executable = 'bundle'
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_elixir_elixir_ls_config = {
+      \   'elixirLS': {
+      \     'dialyzerEnabled': v:false,
+      \   },
+      \ }
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_echo_msg_error_str = 'E'

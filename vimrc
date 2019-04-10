@@ -93,23 +93,23 @@ endif
 let g:ale_fix_on_save = 0
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
-      \ 'ruby': ['rubocop']
+      \ 'ruby': ['rubocop', 'reek'],
       \}
 let g:ale_fixers = {
       \ 'javascript': ['prettier', 'eslint'],
-      \ 'ruby': ['rubocop']
+      \ 'ruby': ['rubocop'],
       \ }
 let b:ale_linters_ignore = ['tsserver'] " See https://github.com/w0rp/ale/issues/1728
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_ruby_reek_executable = 'bundle'
-let g:ale_ruby_reek_show_wiki_link = 1
+let g:ale_ruby_reek_show_context = 1
 let g:ale_ruby_brakeman_executable = 'bundle'
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 highlight ALEErrorSign cterm=UNDERLINE ctermfg=red ctermbg=0

@@ -67,6 +67,14 @@ if dein#load_state('~/.cache/dein')
   call dein#save_state()
 endif
 
+" vim-gitgutter
+augroup vim-gitguttercolors
+  autocmd!
+  autocmd ColorScheme * highlight GitGutterAdd cterm=bold ctermfg=82 ctermbg=0
+  autocmd ColorScheme * highlight GitGutterChange cterm=bold ctermfg=11 ctermbg=0
+  autocmd ColorScheme * highlight GitGutterDelete cterm=bold ctermfg=red ctermbg=0
+augroup END
+
 " deoplete.nvim
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
@@ -116,10 +124,11 @@ let g:ale_sign_warning = '--'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
-highlight clear ALEErrorSign
-highlight clear ALEWarningSign
-highlight ALEErrorSign cterm=UNDERLINE ctermfg=red ctermbg=0
-highlight ALEWarning cterm=UNDERLINE ctermfg=yellow ctermbg=0
+augroup alecolors
+  autocmd!
+  autocmd ColorScheme * highlight ALEErrorSign cterm=bold ctermfg=red ctermbg=0
+  autocmd ColorScheme * highlight ALEWarningSign cterm=bold ctermfg=11 ctermbg=0
+augroup END
 
 " fzf.vim
 set rtp+=/usr/local/opt/fzf
@@ -224,6 +233,8 @@ highlight Pmenu ctermbg=6 guibg=#4c745a
 highlight PmenuSel ctermbg=3 guibg=#d4b979
 highlight PmenuSbar ctermbg=0 guibg=#333333
 highlight Search cterm=BOLD ctermfg=yellow ctermbg=NONE
+
+colorscheme railscasts
 
 "----------------------------------------
 " KeyMap:

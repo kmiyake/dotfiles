@@ -6,6 +6,9 @@ if &compatible
   set nocompatible
 endif
 
+augroup MyAutoCmd
+  autocmd!
+augroup END
 
 "----------------------------------------
 " Plugins
@@ -68,8 +71,7 @@ if dein#load_state('~/.cache/dein')
 endif
 
 " vim-gitgutter
-augroup vim-gitguttercolors
-  autocmd!
+augroup MyAutoCmd
   autocmd ColorScheme * highlight GitGutterAdd cterm=bold ctermfg=82 ctermbg=0
   autocmd ColorScheme * highlight GitGutterChange cterm=bold ctermfg=11 ctermbg=0
   autocmd ColorScheme * highlight GitGutterDelete cterm=bold ctermfg=red ctermbg=0
@@ -125,8 +127,7 @@ let g:ale_sign_warning = '△'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
-augroup alecolors
-  autocmd!
+augroup MyAutoCmd
   autocmd ColorScheme * highlight ALEErrorSign cterm=bold ctermfg=red ctermbg=0
   autocmd ColorScheme * highlight ALEWarningSign cterm=bold ctermfg=11 ctermbg=0
 augroup END
@@ -213,6 +214,19 @@ set smartindent
 set ambiwidth=double
 set splitbelow
 set clipboard+=unnamed
+
+augroup MyAutoCmd
+  autocmd InsertEnter *
+        \ if &l:foldenable && &l:foldmethod !=# 'manual' |
+        \   let b:foldmethod_save = &l:foldmethod |
+        \   let &l:foldmethod = 'manual' |
+        \ endif
+  autocmd InsertLeave,WinLeave *
+        \ if &l:foldmethod ==# 'manual' && exists('b:foldmethod_save') |
+        \   let &l:foldmethod = b:foldmethod_save |
+        \   execute 'normal! zx' |
+        \ endif
+augroup END
 
 "----------------------------------------
 " View:

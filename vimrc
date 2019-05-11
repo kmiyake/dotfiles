@@ -41,6 +41,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('itchyny/lightline.vim')
   call dein#add('Konfekt/FastFold')
   call dein#add('janko-m/vim-test')
+  call dein#add('tpope/vim-dispatch')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
@@ -171,6 +172,7 @@ nmap <silent> <Leader><C-f> :TestFile<CR>
 nmap <silent> <Leader><C-s> :TestSuite<CR>
 nmap <silent> <Leader><C-l> :TestLast<CR>
 nmap <silent> <Leader><C-g> :TestVisit<CR>
+let test#strategy = 'dispatch'
 
 " vim-surround
 let g:surround_61 = "<%= \r %>"

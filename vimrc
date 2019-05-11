@@ -228,6 +228,9 @@ augroup MyAutoCmd
         \   let &l:foldmethod = b:foldmethod_save |
         \   execute 'normal! zx' |
         \ endif
+  " Cusom filetypes
+  autocmd BufNewFile,BufRead .babelrc set filetype=json
+  autocmd BufNewFile,BufRead Gemfile set filetype=ruby
 augroup END
 
 "----------------------------------------

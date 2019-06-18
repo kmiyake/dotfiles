@@ -21,6 +21,7 @@ if dein#load_state('~/.cache/dein')
 
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
   call dein#add('jpo/vim-railscasts-theme')
+  call dein#add('morhetz/gruvbox')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('Shougo/deoplete.nvim')
@@ -254,7 +255,10 @@ highlight PmenuSel ctermbg=3 guibg=#d4b979
 highlight PmenuSbar ctermbg=0 guibg=#333333
 highlight Search cterm=BOLD ctermfg=yellow ctermbg=NONE
 
-colorscheme railscasts
+" colorscheme railscasts
+let g:gruvbox_contrast_light='hard'
+colorscheme gruvbox
+set background=dark
 
 "----------------------------------------
 " KeyMap:

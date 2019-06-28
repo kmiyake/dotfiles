@@ -20,7 +20,6 @@ if dein#load_state('~/.cache/dein')
   call dein#begin('~/.cache/dein')
 
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('jpo/vim-railscasts-theme')
   call dein#add('morhetz/gruvbox')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('airblade/vim-gitgutter')
@@ -33,40 +32,16 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('prabirshrestha/async.vim')
   call dein#add('prabirshrestha/vim-lsp')
-  call dein#add('carlitux/deoplete-ternjs', {
-        \ 'on_ft': 'javascript'
-        \})
   call dein#add('w0rp/ale')
   call dein#add('junegunn/fzf.vim')
   call dein#add('mileszs/ack.vim')
   call dein#add('itchyny/lightline.vim')
-  call dein#add('Konfekt/FastFold')
   call dein#add('janko-m/vim-test')
   call dein#add('tpope/vim-dispatch')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('tpope/vim-rhubarb')
-  call dein#add('tpope/vim-rails', {
-        \ 'on_ft': ['ruby', 'slim']
-        \})
-  call dein#add('tpope/vim-rbenv', {
-        \ 'on_ft': 'ruby'
-        \})
-  call dein#add('tpope/vim-bundler', {
-        \ 'on_ft': 'ruby'
-        \})
-  call dein#add('slim-template/vim-slim', {
-        \ 'on_ft': 'slim'
-        \})
-  call dein#add('posva/vim-vue', {
-        \ 'on_ft': 'vue'
-        \})
-  call dein#add('digitaltoad/vim-pug', {
-        \ 'on_ft': 'vue'
-        \})
-  call dein#add('kchmck/vim-coffee-script')
 
   call dein#end()
   call dein#save_state()
@@ -81,12 +56,8 @@ augroup END
 
 " deoplete.nvim
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-      \ 'auto_complete_delay': 500,
-      \ })
 
 " neosnippet.vim
-let g:neosnippet#snippets_directory='~/.vim/snippets/'
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
@@ -112,17 +83,9 @@ let g:ale_fixers = {
       \ 'javascript': ['prettier', 'eslint'],
       \ 'ruby': ['rubocop'],
       \ }
-let b:ale_linters_ignore = ['tsserver'] " See https://github.com/w0rp/ale/issues/1728
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_ruby_reek_executable = 'bundle'
-let g:ale_ruby_reek_show_context = 1
 let g:ale_ruby_brakeman_executable = 'bundle'
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_elixir_elixir_ls_config = {
-      \   'elixirLS': {
-      \     'dialyzerEnabled': v:false,
-      \   },
-      \ }
 
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '△'
@@ -159,13 +122,6 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head'
       \ },
       \ }
-
-" FastFold
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-" let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-" let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-let g:ruby_fold = 1
 
 " vim-test
 nmap <silent> <Leader><C-n> :TestNearest<CR>
@@ -232,6 +188,7 @@ augroup MyAutoCmd
   " Cusom filetypes
   autocmd BufNewFile,BufRead .babelrc set filetype=json
   autocmd BufNewFile,BufRead Gemfile set filetype=ruby
+  autocmd BufNewFile,BufRead .envrc set filetype=sh
 augroup END
 
 "----------------------------------------
@@ -255,7 +212,6 @@ highlight PmenuSel ctermbg=3 guibg=#d4b979
 highlight PmenuSbar ctermbg=0 guibg=#333333
 highlight Search cterm=BOLD ctermfg=yellow ctermbg=NONE
 
-" colorscheme railscasts
 let g:gruvbox_contrast_light='hard'
 colorscheme gruvbox
 set background=dark

@@ -78,13 +78,14 @@ if executable('solargraph')
 endif
 
 " ale
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'ruby': ['rubocop', 'reek'],
       \ 'elixir': ['credo', 'elixir-ls'],
       \}
 let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': ['prettier', 'eslint'],
       \ 'ruby': ['rubocop'],
       \ }

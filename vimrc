@@ -42,6 +42,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('fatih/vim-go')
+  call dein#add('deoplete-plugins/deoplete-go')
 
   call dein#end()
   call dein#save_state()
@@ -56,6 +58,9 @@ augroup END
 
 " deoplete.nvim
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', {
+      \ 'go': '[^. *\t]\.\w*',
+      \ })
 
 " neosnippet.vim
 imap <C-k> <Plug>(neosnippet_expand_or_jump)

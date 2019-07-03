@@ -58,56 +58,8 @@ select-word-style default
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
-# fzf via Homebrew
-if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh
-fi
-
-_has(){
-  command type "$1" > /dev/null 2>&1
-}
-
-# fzf + ag configuration
-if _has fzf && _has ag; then
-  export FZF_DEFAULT_COMMAND='ag --nocolor --hidden -g ""'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_DEFAULT_OPTS='
-    --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-    --color info:108,prompt:109,spinner:108,pointer:168,marker:168
-  '
-fi
-
 autoload -U compinit
 compinit
 zstyle ':completion:*' list-colors ''
-
-#------------------------------
-# Variables
-#
-alias ls='ls -G'
-
-# Bundler
-alias bi='bundle install'
-alias be='bundle exec'
-
-# Git
-alias g='git'
-alias gd='git diff --color'
-alias gds='git diff --color --staged'
-alias ga='git add'
-alias gap='git add -p'
-alias gc='git commit'
-alias gca='git commit --amend'
-alias gco='git checkout'
-alias gcop='git branch -a | peco | xargs git checkout'
-alias gs='git status'
-alias grm="git status | grep deleted | awk '{print \$2}' | xargs git rm"
-alias gg='git grep -i -n'
-alias gpsf='git push --force-with-lease'
-alias gb='git branch'
-alias gbm='git branch --merged'
-alias gbd='git branch -d'
 
 [[ -f ~/.localrc.zsh ]] && . ~/.localrc.zsh

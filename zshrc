@@ -1,4 +1,4 @@
-fpath=(~/.zsh/functions/ $fpath)
+export LC_ALL=en_US.UTF-8
 
 autoload colors
 colors

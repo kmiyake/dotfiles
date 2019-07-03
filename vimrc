@@ -218,7 +218,6 @@ highlight PmenuSel ctermbg=3 guibg=#d4b979
 highlight PmenuSbar ctermbg=0 guibg=#333333
 highlight Search cterm=BOLD ctermfg=yellow ctermbg=NONE
 
-let g:gruvbox_contrast_light='hard'
 colorscheme gruvbox
 set background=dark
 

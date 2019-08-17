@@ -42,8 +42,12 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-commentary')
   call dein#add('tpope/vim-endwise')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-rhubarb')
+  call dein#add('tpope/vim-rails')
   call dein#add('fatih/vim-go')
   call dein#add('deoplete-plugins/deoplete-go')
+  call dein#add('mattn/webapi-vim')
+  call dein#add('mattn/gist-vim')
 
   call dein#end()
   call dein#save_state()
@@ -76,28 +80,28 @@ if executable('solargraph')
         \ 'whitelist': ['ruby'],
         \ })
 endif
+let g:lsp_diagnostics_enabled = 0
 
 " ale
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'ruby': ['rubocop', 'reek'],
+      \ 'typescript': ['eslint'],
       \ 'elixir': ['credo', 'elixir-ls'],
       \}
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'javascript': ['prettier', 'eslint'],
+      \ 'typescript': ['eslint'],
       \ 'ruby': ['rubocop'],
       \ }
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_ruby_reek_executable = 'bundle'
-let g:ale_ruby_brakeman_executable = 'bundle'
-
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '△'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
+let g:ale_javascript_prettier_use_local_config = 1
 augroup MyAutoCmd
   autocmd ColorScheme * highlight ALEErrorSign cterm=bold ctermfg=red ctermbg=0
   autocmd ColorScheme * highlight ALEWarningSign cterm=bold ctermfg=11 ctermbg=0
@@ -192,7 +196,7 @@ augroup MyAutoCmd
         \   execute 'normal! zx' |
         \ endif
   " Cusom filetypes
-  autocmd BufNewFile,BufRead .babelrc set filetype=json
+  autocmd BufNewFile,BufRead .babelrc,.eslintrc set filetype=json
   autocmd BufNewFile,BufRead Gemfile set filetype=ruby
   autocmd BufNewFile,BufRead .envrc set filetype=sh
 augroup END
@@ -212,6 +216,7 @@ set nobackup
 set noswapfile
 set nowritebackup
 set noundofile
+let php_folding=1
 
 highlight Pmenu ctermbg=6 guibg=#4c745a
 highlight PmenuSel ctermbg=3 guibg=#d4b979

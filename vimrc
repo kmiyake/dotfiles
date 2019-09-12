@@ -23,15 +23,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('morhetz/gruvbox')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('prabirshrestha/async.vim')
-  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('neoclide/coc.nvim', { 'rev': 'release' })
   call dein#add('w0rp/ale')
   call dein#add('junegunn/fzf.vim')
   call dein#add('mileszs/ack.vim')
@@ -45,7 +39,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('tpope/vim-rhubarb')
   call dein#add('tpope/vim-rails')
   call dein#add('fatih/vim-go')
-  call dein#add('deoplete-plugins/deoplete-go')
   call dein#add('mattn/webapi-vim')
   call dein#add('mattn/gist-vim')
 
@@ -60,41 +53,26 @@ augroup MyAutoCmd
   autocmd ColorScheme * highlight GitGutterDelete cterm=bold ctermfg=red ctermbg=0
 augroup END
 
-" deoplete.nvim
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', {
-      \ 'go': '[^. *\t]\.\w*',
-      \ })
-
 " neosnippet.vim
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-
-" vim-lsp
-if executable('solargraph')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
-        \ })
-endif
-let g:lsp_diagnostics_enabled = 0
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " ale
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
 let g:ale_linters = {
-      \ 'javascript': ['eslint'],
       \ 'ruby': ['rubocop', 'reek'],
+      \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
       \ 'elixir': ['credo', 'elixir-ls'],
       \}
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'ruby': ['rubocop'],
       \ 'javascript': ['prettier', 'eslint'],
       \ 'typescript': ['eslint'],
-      \ 'ruby': ['rubocop'],
       \ }
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '△'
@@ -185,16 +163,6 @@ set splitbelow
 set clipboard+=unnamed
 
 augroup MyAutoCmd
-  autocmd InsertEnter *
-        \ if &l:foldenable && &l:foldmethod !=# 'manual' |
-        \   let b:foldmethod_save = &l:foldmethod |
-        \   let &l:foldmethod = 'manual' |
-        \ endif
-  autocmd InsertLeave,WinLeave *
-        \ if &l:foldmethod ==# 'manual' && exists('b:foldmethod_save') |
-        \   let &l:foldmethod = b:foldmethod_save |
-        \   execute 'normal! zx' |
-        \ endif
   " Cusom filetypes
   autocmd BufNewFile,BufRead .babelrc,.eslintrc set filetype=json
   autocmd BufNewFile,BufRead Gemfile set filetype=ruby

@@ -41,6 +41,11 @@ if dein#load_state('~/.cache/dein')
   call dein#add('fatih/vim-go')
   call dein#add('mattn/webapi-vim')
   call dein#add('mattn/gist-vim')
+  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+        \ 'build': 'cd app & yarn install' })
+  call dein#add('udalov/kotlin-vim')
+  call dein#add('jiangmiao/auto-pairs')
+  call dein#add('StanAngeloff/php.vim')
 
   call dein#end()
   call dein#save_state()
@@ -53,13 +58,6 @@ augroup MyAutoCmd
   autocmd ColorScheme * highlight GitGutterDelete cterm=bold ctermfg=red ctermbg=0
 augroup END
 
-" neosnippet.vim
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 " coc.vim
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -71,6 +69,13 @@ function! s:show_documentation()
   endif
 endfunction
 
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " ale
@@ -80,18 +85,22 @@ let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
       \ 'elixir': ['credo', 'elixir-ls'],
+      \ 'scss': ['stylelint'],
       \}
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'ruby': ['rubocop'],
       \ 'javascript': ['prettier', 'eslint'],
       \ 'typescript': ['eslint'],
+      \ 'go': ['goimports', 'gofmt'],
+      \ 'scss': ['stylelint'],
       \ }
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '△'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
+let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_javascript_prettier_use_local_config = 1
 augroup MyAutoCmd
   autocmd ColorScheme * highlight ALEErrorSign cterm=bold ctermfg=red ctermbg=0
@@ -178,7 +187,7 @@ set clipboard+=unnamed
 augroup MyAutoCmd
   " Cusom filetypes
   autocmd BufNewFile,BufRead .babelrc,.eslintrc set filetype=json
-  autocmd BufNewFile,BufRead Gemfile set filetype=ruby
+  autocmd BufNewFile,BufRead Gemfile,*.jb set filetype=ruby
   autocmd BufNewFile,BufRead .envrc set filetype=sh
 augroup END
 

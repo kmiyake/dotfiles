@@ -231,3 +231,7 @@ imap <C-f> <right>
 imap <C-b> <left>
 map <C-e> $
 map <C-a> 0
+
+augroup MyAutoCmd
+  autocmd FileType vue setlocal commentstring=//\ %s
+augroup END

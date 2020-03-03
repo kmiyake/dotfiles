@@ -84,6 +84,7 @@ let g:ale_linters = {
       \ 'ruby': ['rubocop', 'reek'],
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
+      \ 'vue': ['eslint'],
       \ 'elixir': ['credo', 'elixir-ls'],
       \ 'scss': ['stylelint'],
       \}
@@ -91,7 +92,8 @@ let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'ruby': ['rubocop'],
       \ 'javascript': ['prettier', 'eslint'],
-      \ 'typescript': ['eslint'],
+      \ 'typescript': ['prettier', 'eslint'],
+      \ 'vue': ['prettier', 'eslint'],
       \ 'go': ['goimports', 'gofmt'],
       \ 'scss': ['stylelint'],
       \ }

@@ -25,7 +25,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('neoclide/coc.nvim', { 'rev': 'release' })
+  call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
   call dein#add('w0rp/ale')
   call dein#add('junegunn/fzf.vim')
   call dein#add('mileszs/ack.vim')
@@ -46,6 +46,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('udalov/kotlin-vim')
   call dein#add('jiangmiao/auto-pairs')
   call dein#add('StanAngeloff/php.vim')
+  call dein#add('neoclide/vim-jsx-improve')
 
   call dein#end()
   call dein#save_state()
@@ -93,6 +94,7 @@ let g:ale_fixers = {
       \ 'ruby': ['rubocop'],
       \ 'javascript': ['prettier', 'eslint'],
       \ 'typescript': ['prettier', 'eslint'],
+      \ 'javascriptreact': ['prettier', 'eslint'],
       \ 'vue': ['prettier', 'eslint'],
       \ 'go': ['goimports', 'gofmt'],
       \ 'scss': ['stylelint'],
@@ -104,6 +106,10 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
 let g:ale_ruby_rubocop_executable = 'bundle'
 let g:ale_javascript_prettier_use_local_config = 1
+
+nmap <silent> [c <Plug>(ale_previous_wrap)
+nmap <silent> ]c <Plug>(ale_next_wrap)
+
 augroup MyAutoCmd
   autocmd ColorScheme * highlight ALEErrorSign cterm=bold ctermfg=red ctermbg=0
   autocmd ColorScheme * highlight ALEWarningSign cterm=bold ctermfg=11 ctermbg=0
@@ -117,7 +123,7 @@ nmap r :Tags<CR>
 
 " ack.vim
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep -i'
 endif
 nmap [q :cnext<CR>
 nmap ]q :cprev<CR>
@@ -131,9 +137,15 @@ let g:lightline = {
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'filename': 'LightlineFilename'
       \ },
       \ }
+
+function! LightlineFilename()
+  let filename = @% !=# '' ? @% : '[No Name]'
+  return filename
+endfunction
 
 " vim-test
 nmap <silent> <Leader><C-n> :TestNearest<CR>
@@ -238,3 +250,6 @@ map <C-a> 0
 augroup MyAutoCmd
   autocmd FileType vue setlocal commentstring=//\ %s
 augroup END
+
+" ファイルパスをコピー
+nnoremap <Space><C-g> :<C-u>echo "copied fullpath: " . @% \| let @+=@%<CR>

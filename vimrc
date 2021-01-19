@@ -77,7 +77,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " ale
 let g:ale_fix_on_save = 1
@@ -88,19 +88,21 @@ let g:ale_linters = {
       \ 'vue': ['eslint'],
       \ 'elixir': ['credo', 'elixir-ls'],
       \ 'scss': ['stylelint'],
+      \ 'sass': ['stylelint'],
       \}
 let g:ale_fixers = {
       \ '*': ['remove_trailing_lines', 'trim_whitespace'],
       \ 'ruby': ['rubocop'],
-      \ 'javascript': ['prettier', 'eslint'],
-      \ 'typescript': ['prettier', 'eslint'],
-      \ 'javascriptreact': ['prettier', 'eslint'],
+      \ 'javascript': ['prettier'],
+      \ 'typescript': ['prettier'],
+      \ 'javascriptreact': ['prettier'],
       \ 'vue': ['prettier', 'eslint'],
       \ 'go': ['goimports', 'gofmt'],
       \ 'scss': ['stylelint'],
+      \ 'sass': ['stylelint'],
       \ }
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '△'
+let g:ale_sign_error = 'E'
+let g:ale_sign_warning = 'W'
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %code%: %s [%severity%]'
@@ -204,6 +206,7 @@ augroup MyAutoCmd
   autocmd BufNewFile,BufRead .babelrc,.eslintrc set filetype=json
   autocmd BufNewFile,BufRead Gemfile,*.jb set filetype=ruby
   autocmd BufNewFile,BufRead .envrc set filetype=sh
+  autocmd BufNewFile,BufRead .env.template set filetype=txt
 augroup END
 
 "----------------------------------------

@@ -75,4 +75,6 @@ autoload -U compinit
 compinit
 zstyle ':completion:*' list-colors ''
 
+setopt nonomatch
+
 [[ -f ~/.localrc.zsh ]] && . ~/.localrc.zsh

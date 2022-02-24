@@ -52,12 +52,14 @@ if dein#load_state('~/.cache/dein')
   call dein#save_state()
 endif
 
-" vim-gitgutter
-augroup MyAutoCmd
-  autocmd ColorScheme * highlight GitGutterAdd cterm=bold ctermfg=82 ctermbg=0
-  autocmd ColorScheme * highlight GitGutterChange cterm=bold ctermfg=11 ctermbg=0
-  autocmd ColorScheme * highlight GitGutterDelete cterm=bold ctermfg=red ctermbg=0
-augroup END
+" plugin remove check {{{
+let s:removed_plugins = dein#check_clean()
+echo s:removed_plugins
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
+" }}}
 
 " coc.vim
 nnoremap <silent> K :call <SID>show_documentation()<CR>
